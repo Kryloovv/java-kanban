@@ -5,33 +5,33 @@ public class Main {
         // Создаем две задачи
         manager.addTask(new Task("task1",
                 "task1",
-                manager.getCounterId(),
+                manager.generateCounterId(),
                 Status.NEW));
         manager.addTask(new Task("task2",
                 "task2",
-                manager.getCounterId(),
+                manager.generateCounterId(),
                 Status.NEW));
         // также эпик с двумя подзадачами
         manager.addEpic(new Epic("epic1",
                 "epic1",
-                manager.getCounterId()));
+                manager.generateCounterId()));
         manager.addSubtask(new Subtask("subtask1",
                 "subtask1",
-                manager.getCounterId(),
+                manager.generateCounterId(),
                 Status.IN_PROGRESS,
                 3));
         manager.addSubtask(new Subtask("subtask2",
                 "subtask2",
-                manager.getCounterId(),
+                manager.generateCounterId(),
                 Status.DONE,
                 3));
         // и эпик с одной подзадачей
         manager.addEpic(new Epic("epic2",
                 "epic2",
-                manager.getCounterId()));
+                manager.generateCounterId()));
         manager.addSubtask(new Subtask("subtask3",
                 "subtask3",
-                manager.getCounterId(),
+                manager.generateCounterId(),
                 Status.NEW,
                 6));
 

@@ -19,7 +19,7 @@ public class TaskManager {
         return subtaskTable;
     }
 
-    public int getCounterId() {
+    public int generateCounterId() {
         return ++counterId;
     }
 
@@ -143,6 +143,7 @@ public class TaskManager {
     }
 
     public void deleteTaskById(int taskId) {
+        // Ищем и удаляем задачу по ID в таблицах задач, эпиков и подзадач
         if (taskTable.containsKey(taskId)) {
             taskTable.remove(taskId);
         } else if (epicTable.containsKey(taskId)) {
