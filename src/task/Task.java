@@ -1,3 +1,5 @@
+package task;
+
 import java.util.Objects;
 
 public class Task {
@@ -6,7 +8,7 @@ public class Task {
     protected int id;
     protected Status status;
 
-    // Конструктор для Task и Subtask
+    // Конструктор для task.Task и task.Subtask
     public Task(String name, String description, int id, Status status) {
         this.name = name;
         this.description = description;
@@ -14,11 +16,23 @@ public class Task {
         this.status = status;
     }
 
-    // Конструктор для Epic
+    // Конструктор для task.Epic
     public Task(String name, String description, int id) {
         this.name = name;
         this.description = description;
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public Status getStatus() {
@@ -46,7 +60,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
+        return "task.Task{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", id=" + id +
