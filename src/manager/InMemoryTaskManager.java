@@ -5,6 +5,7 @@ import task.Status;
 import task.Subtask;
 import task.Task;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -64,7 +65,7 @@ public class InMemoryTaskManager implements TaskManager {
     public void updateEpic(Epic epic) {
         if (epicTable.containsKey(epic.getId())) {
             Epic currentEpic = epicTable.get(epic.getId());
-            ArrayList<Integer> subtaskIds = currentEpic.getSubtaskIds();
+            List<Integer> subtaskIds = currentEpic.getSubtaskIds();
 
             epicTable.put(epic.getId(), epic);
             epic.setSubtaskIds(subtaskIds); // Сохраняем существующий список подзадач
@@ -151,28 +152,16 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public ArrayList<Task> getListHistory() {
+    public List<Task> getListHistory() {
         return historyManager.getDefaultHistory();
     }
 
-//    public Object getTaskById(int taskId) {
-//        // Ищем задачу по ID в таблицах задач, эпиков и подзадач
-//        if (taskTable.containsKey(taskId)) {
-//            return taskTable.get(taskId);
-//        } else if (epicTable.containsKey(taskId)) {
-//            return epicTable.get(taskId);
-//        } else if (subtaskTable.containsKey(taskId)) {
-//            return subtaskTable.get(taskId);
-//        }
-//        return null; // Возвращаем null, если задача не найдена
-//    }
-
     @Override
-    public ArrayList<Subtask> getSubtasksByEpicId(int epicId) {
+    public List<Subtask> getSubtasksByEpicId(int epicId) {
         if (!epicTable.isEmpty()) {
             Epic epic = epicTable.get(epicId);
-            ArrayList<Integer> subtaskIds = epic.getSubtaskIds();
-            ArrayList<Subtask> subtaskList = new ArrayList<>();
+            List<Integer> subtaskIds = epic.getSubtaskIds();
+            List<Subtask> subtaskList = new ArrayList<>();
             // Создаем список подзадач по их ID
             for (Integer subtaskId : subtaskIds) {
                 subtaskList.add(subtaskTable.get(subtaskId));
@@ -183,8 +172,8 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public ArrayList<Object> getAllTasks() {
-        ArrayList<Object> allTasks = new ArrayList<>();
+    public List<Object> getAllTasks() {
+        List<Object> allTasks = new ArrayList<>();
         // Добавляем задачи
         if (!taskTable.isEmpty()) {
             for (Task task : taskTable.values()) {
@@ -214,7 +203,7 @@ public class InMemoryTaskManager implements TaskManager {
         } else if (epicTable.containsKey(taskId)) {
             // Удаляем все подзадачи, связанные с эпиком
             Epic epic = epicTable.get(taskId);
-            ArrayList<Integer> subtaskIds = epic.getSubtaskIds();
+            List<Integer> subtaskIds = epic.getSubtaskIds();
             if (!subtaskIds.isEmpty()) {
                 for (Integer subtaskId : subtaskIds) {
                     subtaskTable.remove(subtaskId);
@@ -226,7 +215,7 @@ public class InMemoryTaskManager implements TaskManager {
             Subtask subtask = subtaskTable.get(taskId);
             Epic epic = epicTable.get(subtask.getEpicId());
 
-            ArrayList<Integer> subtaskIds = epic.getSubtaskIds();
+            List<Integer> subtaskIds = epic.getSubtaskIds();
             subtaskIds.remove(Integer.valueOf(taskId));
             epic.setSubtaskIds(subtaskIds);
             updateEpicStatus(epic); // Обновляем статус эпика после удаления подзадачи

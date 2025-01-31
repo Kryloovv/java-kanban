@@ -4,7 +4,7 @@ import task.Epic;
 import task.Status;
 import task.Subtask;
 import task.Task;
-import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,7 +21,7 @@ class InMemoryHistoryManagerTest {
         manager.getEpic(2);
         manager.getSubtask(3);
 
-        ArrayList<Task> listHistory = manager.getListHistory();
+        List<Task> listHistory = manager.getListHistory();
         assertNotNull(listHistory, "История не пустая.");
         assertEquals(3, listHistory.size(), "Количество элементов в истории не совпадает.");
 

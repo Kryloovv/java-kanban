@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import task.Status;
 import task.Task;
-import java.util.ArrayList;
 
 class ManagersTest {
     // Проверяем, что утилитарный класс
