@@ -18,7 +18,7 @@ public class InMemoryHistoryManager implements HistoryManager {
     public void add(Task task) {
         if (nodeMap.containsKey(task.getId())) {
             // Если задача уже есть, удаляем старый узел перед добавлением нового
-            removeNode(nodeMap.get(task.getId()));
+            remove(task.getId());
         }
         addLast(task);
         nodeMap.put(task.getId(), tail);
@@ -42,6 +42,7 @@ public class InMemoryHistoryManager implements HistoryManager {
             return;
         }
         removeNode(nodeMap.get(id));
+        nodeMap.remove(id);
     }
 
     public void removeNode(Node node) {
@@ -74,18 +75,18 @@ public class InMemoryHistoryManager implements HistoryManager {
         return result;
     }
 
-    public static class Node {
+    private static class Node {
         Task task;
         Node prev;
         Node next;
 
-        public Node(Node prev, Task task, Node next) {
+        private Node(Node prev, Task task, Node next) {
             this.task = task;
             this.prev = prev;
             this.next = next;
         }
 
-        public Task getTask() {
+        private Task getTask() {
             return task;
         }
 
