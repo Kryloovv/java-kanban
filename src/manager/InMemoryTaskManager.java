@@ -145,10 +145,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void addHistory(Task task) {
-        if (historyManager.getDefaultHistory().size() == 10) {
-            historyManager.getDefaultHistory().remove(0);
-        }
-        historyManager.getDefaultHistory().add(task);
+        historyManager.add(task);
     }
 
     @Override
@@ -206,6 +203,8 @@ public class InMemoryTaskManager implements TaskManager {
             List<Integer> subtaskIds = epic.getSubtaskIds();
             if (!subtaskIds.isEmpty()) {
                 for (Integer subtaskId : subtaskIds) {
+                    Subtask subtask = subtaskTable.get(subtaskId);
+                    subtask.setEpicId(-1);
                     subtaskTable.remove(subtaskId);
                 }
             }
@@ -220,7 +219,9 @@ public class InMemoryTaskManager implements TaskManager {
             epic.setSubtaskIds(subtaskIds);
             updateEpicStatus(epic); // Обновляем статус эпика после удаления подзадачи
             subtaskTable.remove(taskId);
+            subtask.setEpicId(-1);
         }
+        historyManager.remove(taskId);
     }
 
     @Override

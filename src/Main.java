@@ -52,7 +52,14 @@ public class Main {
         manager.deleteTaskById(3);
         System.out.println("--- проверяем списки задач ---");
         System.out.println(manager.getAllTasks());
+
+        // Проверяем историю задач.
         System.out.println("--- история задач ---");
+        System.out.println(manager.getListHistory());
+        // Проверяем, что история не дублируется.
+        manager.getTask(2);
+        manager.getTask(2);
+        System.out.println("--- проверяем историю после просмотра задачи ---");
         System.out.println(manager.getListHistory());
     }
 }
